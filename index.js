@@ -1,5 +1,3 @@
-const uuidV4 = require('uuid/v4');
-
 convertBase = (value, from_base, to_base, expected) => {
 
   let range = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+!/'.split('');
