@@ -43,16 +43,16 @@ appendZero = (number, amount) => {
 uuidEncode = (uuid) => {
 
   let fourOut = (uuid.slice(0, 14)) + (uuid.slice(15, 36));
-
+  
   let rePlace = fourOut.toUpperCase().replace(/-/g, '');
 
-  let convert1 = convertBase(rePlace.slice(0, 11), 16, 64, 8);
-  let convert2 = convertBase(rePlace.slice(11, 21), 16, 64, 7);
-  let convert3 = convertBase(rePlace.slice(21, 31), 16, 64, 7);
+  let convert = new Array (
+    convertBase(rePlace.slice(0, 11), 16, 64, 8),
+    convertBase(rePlace.slice(11, 21), 16, 64, 7),
+    convertBase(rePlace.slice(21, 31), 16, 64, 7)
+  )
 
-  let encodedUuid = convert1 + convert2 + convert3;
-
-  return encodedUuid;
+  return convert.join('');;
 }
 
 uuidDecode = (encodedUuid) => {
@@ -69,7 +69,7 @@ uuidDecode = (encodedUuid) => {
 
   let lowerCase = decodedUuid.join('').toLowerCase();
   
-  let a = new Array (
+  let putTogether = new Array (
     lowerCase.slice(0, 8),
     lowerCase.slice(8, 12),
     lowerCase.slice(12, 16),
@@ -77,7 +77,7 @@ uuidDecode = (encodedUuid) => {
     lowerCase.slice(20, 32)
   )
     
-  return a.join('-');
+  return putTogether.join('-');
 }
 
 module.exports = {
