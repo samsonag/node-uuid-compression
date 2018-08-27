@@ -42,8 +42,8 @@ appendZero = (number, amount) => {
 
 uuidEncode = (uuid) => {
 
-  let fourOut = (uuid.slice(0, 14)) + (uuid.slice(15, 36));
-  
+  let pos4 = 14;
+  let fourOut = uuid.slice(0, pos4) + uuid.slice(pos4+1);
   let rePlace = fourOut.toUpperCase().replace(/-/g, '');
 
   let convert = new Array (
@@ -52,7 +52,7 @@ uuidEncode = (uuid) => {
     convertBase(rePlace.slice(21, 31), 16, 64, 7)
   )
 
-  return convert.join('');;
+  return convert.join('');
 }
 
 uuidDecode = (encodedUuid) => {
