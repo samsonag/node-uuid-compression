@@ -1,5 +1,3 @@
-const uuidV4 = require('uuid/v4');
-
 convertBase = (value, from_base, to_base, expected) => {
 
   let range = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+!/'.split('');
@@ -44,46 +42,42 @@ appendZero = (number, amount) => {
 
 uuidEncode = (uuid) => {
 
-  let fourOut = (uuid.slice(0, 14)) + (uuid.slice(15, 36));
-
+  let pos4 = 14;
+  let fourOut = uuid.slice(0, pos4) + uuid.slice(pos4+1);
   let rePlace = fourOut.toUpperCase().replace(/-/g, '');
 
-  let convert1 = convertBase(rePlace.slice(0, 11), 16, 64, 8);
-  let convert2 = convertBase(rePlace.slice(11, 21), 16, 64, 7);
-  let convert3 = convertBase(rePlace.slice(21, 31), 16, 64, 7);
+  let convert = new Array (
+    convertBase(rePlace.slice(0, 11), 16, 64, 8),
+    convertBase(rePlace.slice(11, 21), 16, 64, 7),
+    convertBase(rePlace.slice(21, 31), 16, 64, 7)
+  )
 
-  let encodedUuid = convert1 + convert2 + convert3;
-
-  return encodedUuid;
+  return convert.join('');
 }
 
 uuidDecode = (encodedUuid) => {
 
-  let convert1 = convertBase(encodedUuid.slice(0, 8), 64, 16, 11);
-  let convert2 = convertBase(encodedUuid.slice(8, 15), 64, 16, 10);
-  let convert3 = convertBase(encodedUuid.slice(15, 23), 64, 16, 10);
+  let convParts = new Array (
+    convertBase(encodedUuid.slice(0, 8), 64, 16, 11),
+    convertBase(encodedUuid.slice(8, 15), 64, 16, 10),
+    convertBase(encodedUuid.slice(15, 23), 64, 16, 10)
+  );
 
-  let decodedUuid = convert1 + convert2 + convert3;
+  let decodedUuid = convParts.join('').split('');
 
-  let cutFour1 = decodedUuid.slice(0, 12) + '4';
-  let cutFour2 = decodedUuid.slice(12, 32);
+  decodedUuid.splice(12, 0, '4');
 
-  let put = cutFour1 + cutFour2;
-
-  let lowerCase = put.toLowerCase();
-
-  let cfm1 = lowerCase.slice(0, 8);
-  let cfm2 = lowerCase.slice(8, 12);
-  let cfm3 = lowerCase.slice(12, 16);
-  let cfm4 = lowerCase.slice(16, 20);
-  let cfm5 = lowerCase.slice(20, 32);
-
-  let con1 = cfm1.concat('-', cfm2);
-  let con2 = cfm3.concat('-', cfm4);
-  let connect = con1.concat('-', con2);
-
-  let uuid = connect.concat('-', cfm5);
-  return uuid;
+  let lowerCase = decodedUuid.join('').toLowerCase();
+  
+  let putTogether = new Array (
+    lowerCase.slice(0, 8),
+    lowerCase.slice(8, 12),
+    lowerCase.slice(12, 16),
+    lowerCase.slice(16, 20),
+    lowerCase.slice(20, 32)
+  )
+    
+  return putTogether.join('-');
 }
 
 module.exports = {

@@ -1,9 +1,5 @@
-// after fixing index.js, require correct file
-// separate test suits for encode and decode
-// extract data to external testData variable
-
-var nuuc = require('../index.js');
-var expect = require('chai').expect;
+let nuuc = require('../index.js');
+let expect = require('chai').expect;
 
 let testData = {
     decode :{
@@ -65,15 +61,13 @@ describe('Decode uuid', function () {
 
   });
 
-// describe second test suite for decode
-
   describe('Encode uuid', function () {
 
     it('uuid with one zero', function () {
     
       let uuid = testData.encode.e_oneZero
   
-        var d_uuid = nuuc.decode(uuid);
+        let d_uuid = nuuc.decode(uuid);
 
         expect(d_uuid).to.be.equal(testData.decode.oneZero);
   
@@ -83,7 +77,7 @@ describe('Decode uuid', function () {
     
         let uuid = testData.encode.e_twoZero
   
-        var d_uuid = nuuc.decode(uuid);
+        let d_uuid = nuuc.decode(uuid);
 
         expect(d_uuid).to.be.equal(testData.decode.twoZero);
     
@@ -93,7 +87,7 @@ describe('Decode uuid', function () {
     
         let uuid = testData.encode.e_allf
   
-        var d_uuid = nuuc.decode(uuid);
+        let d_uuid = nuuc.decode(uuid);
 
         expect(d_uuid).to.be.equal(testData.decode.allf);
   
