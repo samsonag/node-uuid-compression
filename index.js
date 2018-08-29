@@ -1,16 +1,9 @@
 convertBase = (value, from_base, to_base, expected) => {
 
   let range = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+!/'.split('');
-  let from_range = range.slice(0, from_base);
   let to_range = range.slice(0, to_base);
 
-  let dec_value = value.split('').reverse().reduce( (carry, digit, index) => {
-
-    if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `' + digit + '` for base ' + from_base + '.');
-
-    return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
-
-  }, 0);
+  let dec_value = toBaseTen(value, range, from_base);
 
   let new_value = '';
 
@@ -22,6 +15,27 @@ convertBase = (value, from_base, to_base, expected) => {
   let result = new_value || '0';
 
   return ((result == 0) ? result : checkLength(result, expected)).toString();
+}
+
+toBaseTen = (value, range, base) => {
+  let from_range = range.slice(0, base);
+  let reversed = value.split('').reverse();
+  let res;
+
+  try {
+    res = reversed.reduce( (carry, digit, index) => {
+
+      if (from_range.indexOf(digit) === -1) {
+        throw new BadDigit('Invalid digit `' + digit + '` for base ' + base + '.');
+      } 
+      return carry += from_range.indexOf(digit) * (Math.pow(base, index));
+    
+    }, 0);
+  } catch (error) {
+    if (error.name == 'BadDigitException') res = -1;
+  }
+
+  return res;
 }
 
 checkLength = (number, expectedLength) => {
@@ -80,7 +94,17 @@ uuidDecode = (encodedUuid) => {
   return putTogether.join('-');
 }
 
+function BadDigit (message) {
+  this.message = message;
+  this.name = "BadDigitException";
+}
+
+
 module.exports = {
   encode: uuidEncode,
-  decode: uuidDecode
+  decode: uuidDecode,
+  zero: appendZero,
+  length: checkLength,
+  base: convertBase,
+  toTen: toBaseTen
 }
