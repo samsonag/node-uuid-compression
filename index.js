@@ -2,7 +2,7 @@ const uuidV4 = require('uuid/v4');
 
 convertBase = (value, from_base, to_base, expected) => {
 
-  let range = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+!/'.split('');
+  let range = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('');
   let from_range = range.slice(0, from_base);
   let to_range = range.slice(0, to_base);
 

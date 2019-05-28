@@ -14,8 +14,8 @@ let testData = {
     },
     encode: {
         e_oneZero: '1i1TpoNJChzl3Ka0WE4d2j',
-        e_twoZero: '00VbxZek4d2g+w!Bzo18Qe',
-        e_allf:    '3!!!!!!!F!!!!!!F!!!!!!',
+        e_twoZero: '00VbxZek4d2g-w_Bzo18Qe',
+        e_allf:    '3_______F______F______',
         e_false:   '1i1TpoNJChzl3Ka0WE4d2j'
     }
 }
@@ -52,7 +52,7 @@ describe('Decode uuid', function () {
 
   });
 
-  it('false uuid', function () {
+  it('false uuid fails', function () {
   
     let uuid = testData.decode.false
 
