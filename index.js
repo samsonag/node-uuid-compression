@@ -1,18 +1,10 @@
-const uuidV4 = require('uuid/v4');
-
 convertBase = (value, from_base, to_base, expected) => {
 
   let range = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('');
   let from_range = range.slice(0, from_base);
   let to_range = range.slice(0, to_base);
 
-  let dec_value = value.split('').reverse().reduce( (carry, digit, index) => {
-
-    if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `' + digit + '` for base ' + from_base + '.');
-
-    return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
-
-  }, 0);
+  let dec_value = toBaseTen(value, range, from_base);
 
   let new_value = '';
 
@@ -24,6 +16,27 @@ convertBase = (value, from_base, to_base, expected) => {
   let result = new_value || '0';
 
   return ((result == 0) ? result : checkLength(result, expected)).toString();
+}
+
+toBaseTen = (value, range, base) => {
+  let from_range = range.slice(0, base);
+  let reversed = value.split('').reverse();
+  let res;
+
+  try {
+    res = reversed.reduce( (carry, digit, index) => {
+
+      if (from_range.indexOf(digit) === -1) {
+        throw new BadDigit('Invalid digit `' + digit + '` for base ' + base + '.');
+      } 
+      return carry += from_range.indexOf(digit) * (Math.pow(base, index));
+    
+    }, 0);
+  } catch (error) {
+    if (error.name == 'BadDigitException') res = -1;
+  }
+
+  return res;
 }
 
 checkLength = (number, expectedLength) => {
@@ -44,49 +57,55 @@ appendZero = (number, amount) => {
 
 uuidEncode = (uuid) => {
 
-  let fourOut = (uuid.slice(0, 14)) + (uuid.slice(15, 36));
-
+  let pos4 = 14;
+  let fourOut = uuid.slice(0, pos4) + uuid.slice(pos4+1);
   let rePlace = fourOut.toUpperCase().replace(/-/g, '');
 
-  let convert1 = convertBase(rePlace.slice(0, 11), 16, 64, 8);
-  let convert2 = convertBase(rePlace.slice(11, 21), 16, 64, 7);
-  let convert3 = convertBase(rePlace.slice(21, 31), 16, 64, 7);
+  let convert = new Array (
+    convertBase(rePlace.slice(0, 11), 16, 64, 8),
+    convertBase(rePlace.slice(11, 21), 16, 64, 7),
+    convertBase(rePlace.slice(21, 31), 16, 64, 7)
+  )
 
-  let encodedUuid = convert1 + convert2 + convert3;
-
-  return encodedUuid;
+  return convert.join('');
 }
 
 uuidDecode = (encodedUuid) => {
 
-  let convert1 = convertBase(encodedUuid.slice(0, 8), 64, 16, 11);
-  let convert2 = convertBase(encodedUuid.slice(8, 15), 64, 16, 10);
-  let convert3 = convertBase(encodedUuid.slice(15, 23), 64, 16, 10);
+  let convParts = new Array (
+    convertBase(encodedUuid.slice(0, 8), 64, 16, 11),
+    convertBase(encodedUuid.slice(8, 15), 64, 16, 10),
+    convertBase(encodedUuid.slice(15, 23), 64, 16, 10)
+  );
 
-  let decodedUuid = convert1 + convert2 + convert3;
+  let decodedUuid = convParts.join('').split('');
 
-  let cutFour1 = decodedUuid.slice(0, 12) + '4';
-  let cutFour2 = decodedUuid.slice(12, 32);
+  decodedUuid.splice(12, 0, '4');
 
-  let put = cutFour1 + cutFour2;
-
-  let lowerCase = put.toLowerCase();
-
-  let cfm1 = lowerCase.slice(0, 8);
-  let cfm2 = lowerCase.slice(8, 12);
-  let cfm3 = lowerCase.slice(12, 16);
-  let cfm4 = lowerCase.slice(16, 20);
-  let cfm5 = lowerCase.slice(20, 32);
-
-  let con1 = cfm1.concat('-', cfm2);
-  let con2 = cfm3.concat('-', cfm4);
-  let connect = con1.concat('-', con2);
-
-  let uuid = connect.concat('-', cfm5);
-  return uuid;
+  let lowerCase = decodedUuid.join('').toLowerCase();
+  
+  let putTogether = new Array (
+    lowerCase.slice(0, 8),
+    lowerCase.slice(8, 12),
+    lowerCase.slice(12, 16),
+    lowerCase.slice(16, 20),
+    lowerCase.slice(20, 32)
+  )
+    
+  return putTogether.join('-');
 }
+
+function BadDigit (message) {
+  this.message = message;
+  this.name = "BadDigitException";
+}
+
 
 module.exports = {
   encode: uuidEncode,
-  decode: uuidDecode
+  decode: uuidDecode,
+  zero: appendZero,
+  length: checkLength,
+  base: convertBase,
+  toTen: toBaseTen
 }

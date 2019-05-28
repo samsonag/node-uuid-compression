@@ -1,0 +1,50 @@
+{
+  "range": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_",
+  "errorResult": "0",
+  "decode": {
+    "oneZero": "6c05dcf2-5d3c-4afd-bc35-24080e1270ad",
+    "twoZero": "007e5ee3-a2e4-49c2-abee-bfbf720486a8",
+    "allf": "ffffffff-ffff-4fff-ffff-ffffffffffff",
+    "false": "6c05dcf2-5d3c-4afd-bc3--24080e1270ad"
+  },
+  "encode": {
+    "e_oneZero": "1i1TpoNJChzl3Ka0WE4d2j",
+    "e_twoZero": "00VbxZek4d2g-w_Bzo18Qe",
+    "e_allf": "3_______F______F______",
+    "e_false": "1i1TpoNJChzl3Ka0WE4d2j"
+  },
+
+  "length": {
+    "length10": "24080e1270",
+    "length9": "4080e1270",
+    "length11": "024080e1270",
+    "needLengthTo10": "04080e1270",
+    "expect10": 10,
+    "expectNegative": -2
+  },
+  "base": {
+    "hex": "6C05DCF25D3",
+    "base10": 7423277344211,
+    "lesshex": "C05DCF25D3",
+    "furtherhex": "6C05DCF25D35",
+    "convert_false": "6C05#CF25D3",
+    "error_return": -1,
+    "base64": "1i1TpoNJ",
+    "from_base": 16,
+    "to_base": 64,
+    "expected_base64": 8,
+    "expected_hex": 11
+  },
+  "zero": {
+    "zeroOne": 1,
+    "zeroTwo": 2,
+    "zeroAll": 10,
+    "zeroNegative": -2,
+    "needOneZero_hex": "80e1270ad",
+    "oneZero_hex": "080e1270ad",
+    "needTwoZero_hex": "22222222",
+    "twoZero_hex": "0022222222",
+    "needAllZero_hex": "",
+    "allZero_hex": "0000000000"
+  }
+}

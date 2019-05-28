@@ -1,6 +1,25 @@
 
+<<<<<<< HEAD
 # Created by https://www.gitignore.io/api/osx,node,windows,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=osx,node,windows,visualstudiocode
+=======
+# Created by https://www.gitignore.io/api/osx,node,linux,windows
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+>>>>>>> acd4635194b2f42b5d778d61e141bdc05695bd3f
 
 ### Node ###
 # Logs
@@ -9,10 +28,13 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 lerna-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+=======
+>>>>>>> acd4635194b2f42b5d778d61e141bdc05695bd3f
 
 # Runtime data
 pids
@@ -29,7 +51,11 @@ coverage
 # nyc test coverage
 .nyc_output
 
+<<<<<<< HEAD
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+=======
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+>>>>>>> acd4635194b2f42b5d778d61e141bdc05695bd3f
 .grunt
 
 # Bower dependency directory (https://bower.io/)
@@ -65,7 +91,10 @@ typings/
 
 # dotenv environment variables file
 .env
+<<<<<<< HEAD
 .env.test
+=======
+>>>>>>> acd4635194b2f42b5d778d61e141bdc05695bd3f
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -80,6 +109,7 @@ typings/
 .vuepress/dist
 
 # Serverless directories
+<<<<<<< HEAD
 .serverless/
 
 # FuseBox cache
@@ -87,6 +117,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+=======
+.serverless
+>>>>>>> acd4635194b2f42b5d778d61e141bdc05695bd3f
 
 ### OSX ###
 # General
@@ -116,6 +149,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+<<<<<<< HEAD
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -127,6 +161,8 @@ Temporary Items
 # Ignore all local history of files
 .history
 
+=======
+>>>>>>> acd4635194b2f42b5d778d61e141bdc05695bd3f
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -152,4 +188,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+<<<<<<< HEAD
 # End of https://www.gitignore.io/api/osx,node,windows,visualstudiocode
+=======
+
+# End of https://www.gitignore.io/api/osx,node,linux,windows
+>>>>>>> acd4635194b2f42b5d778d61e141bdc05695bd3f
