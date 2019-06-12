@@ -10,42 +10,53 @@ describe('Decode uuid', function () {
 
     it('uuid with one zero', function () {
     
-        let uuid = testData.decode.oneZero
+        let uuid = testData.decoded.oneZero
 
         let e_uuid = nuuc.encode(uuid);
         
-        expect(e_uuid).to.be.equal(testData.encode.e_oneZero);
+        expect(e_uuid).to.be.equal(testData.encoded.e_oneZero);
 
     });
 
     it('uuid with two zeros', function () {
     
-        let uuid = testData.decode.twoZero
+        let uuid = testData.decoded.twoZero
 
         let e_uuid = nuuc.encode(uuid);
 
-        expect(e_uuid).to.be.equal(testData.encode.e_twoZero);
+        expect(e_uuid).to.be.equal(testData.encoded.e_twoZero);
     
     });
     
     it('uuid with all f', function () {
     
-        let uuid = testData.decode.allf
+        let uuid = testData.decoded.allf
 
         let e_uuid = nuuc.encode(uuid);
         
-        expect(e_uuid).to.be.equal(testData.encode.e_allf);
+        expect(e_uuid).to.be.equal(testData.encoded.e_allf);
 
     });
 
     it('false uuid', function () {
     
-        let uuid = testData.decode.false
+        let uuid = testData.decoded.false
 
         let e_uuid = nuuc.encode(uuid);
         
         
-        expect(e_uuid).to.be.not.equal(testData.encode.e_false);
+        expect(e_uuid).to.be.not.equal(testData.encoded.e_false);
+
+    });
+
+    it('with old special chars', function () {
+    
+        let e_uuid = testData.encoded.e_old
+
+        let uuid = nuuc.decode(e_uuid);
+        
+        
+        expect(uuid).to.be.equal(testData.decoded.old);
 
     });
 
@@ -55,41 +66,41 @@ describe('Encode uuid', function () {
 
     it('uuid with one zero', function () {
 
-        let uuid = testData.encode.e_oneZero
+        let uuid = testData.encoded.e_oneZero
 
         let d_uuid = nuuc.decode(uuid);
 
-        expect(d_uuid).to.be.equal(testData.decode.oneZero);
+        expect(d_uuid).to.be.equal(testData.decoded.oneZero);
 
     });
 
     it('uuid with two zeros', function () {
 
-        let uuid = testData.encode.e_twoZero
+        let uuid = testData.encoded.e_twoZero
 
         let d_uuid = nuuc.decode(uuid);
 
-        expect(d_uuid).to.be.equal(testData.decode.twoZero);
+        expect(d_uuid).to.be.equal(testData.decoded.twoZero);
 
     });
 
     it('uuid with all f', function () {
 
-        let uuid = testData.encode.e_allf
+        let uuid = testData.encoded.e_allf
 
         let d_uuid = nuuc.decode(uuid);
 
-        expect(d_uuid).to.be.equal(testData.decode.allf);
+        expect(d_uuid).to.be.equal(testData.decoded.allf);
 
     });
 
     it('false uuid', function () {
 
-        let uuid = testData.encode.e_false
+        let uuid = testData.encoded.e_false
 
         let d_uuid = nuuc.decode(uuid);
         
-        expect(d_uuid).to.be.not.equal(testData.decode.false);
+        expect(d_uuid).to.be.not.equal(testData.decoded.false);
 
     });
 

@@ -1,17 +1,19 @@
 {
   "range": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_",
   "errorResult": "0",
-  "decode": {
+  "decoded": {
     "oneZero": "6c05dcf2-5d3c-4afd-bc35-24080e1270ad",
     "twoZero": "007e5ee3-a2e4-49c2-abee-bfbf720486a8",
     "allf": "ffffffff-ffff-4fff-ffff-ffffffffffff",
-    "false": "6c05dcf2-5d3c-4afd-bc3--24080e1270ad"
+    "false": "6c05dcf2-5d3c-4afd-bc3--24080e1270ad",
+    "old":"0087eeeb-aa23-49a5-9d65-11a7ee5ff569"
   },
-  "encode": {
+  "encoded": {
     "e_oneZero": "1i1TpoNJChzl3Ka0WE4d2j",
     "e_twoZero": "00VbxZek4d2g-w_Bzo18Qe",
     "e_allf": "3_______F______F______",
-    "e_false": "1i1TpoNJChzl3Ka0WE4d2j"
+    "e_false": "1i1TpoNJChzl3Ka0WE4d2j",
+    "e_old":"00X+xhgY3cbdMKHAVkN!Lf"
   },
 
   "length": {

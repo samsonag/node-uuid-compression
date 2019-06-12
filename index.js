@@ -39,6 +39,11 @@ toBaseTen = (value, range, base) => {
   return res;
 }
 
+
+prepareOldChars = (shortUuid) => {
+  return shortUuid.replaceAll('+','-').replaceAll('!','_');
+}
+
 checkLength = (number, expectedLength) => {
   let result = '';
   if (number.length != expectedLength) {
@@ -70,7 +75,9 @@ uuidEncode = (uuid) => {
   return convert.join('');
 }
 
-uuidDecode = (encodedUuid) => {
+uuidDecode = (uuid) => {
+
+  let encodedUuid = prepareOldChars(uuid);
 
   let convParts = new Array (
     convertBase(encodedUuid.slice(0, 8), 64, 16, 11),
@@ -95,10 +102,18 @@ uuidDecode = (encodedUuid) => {
   return putTogether.join('-');
 }
 
+// helper methods -------------------------------------------
 function BadDigit (message) {
   this.message = message;
   this.name = "BadDigitException";
 }
+
+// would have done this by regex, but it sucks because 
+// of replacing '+' with regex is not as easy as thought.
+String.prototype.replaceAll = function (search, replacement) {
+  var target = this;
+  return target.split(search).join(replacement);
+};
 
 
 module.exports = {
@@ -107,5 +122,6 @@ module.exports = {
   zero: appendZero,
   length: checkLength,
   base: convertBase,
-  toTen: toBaseTen
+  toTen: toBaseTen,
+  prepareOldChars: prepareOldChars
 }
