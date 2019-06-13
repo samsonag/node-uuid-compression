@@ -108,11 +108,8 @@ function BadDigit (message) {
   this.name = "BadDigitException";
 }
 
-// would have done this by regex, but it sucks because 
-// of replacing '+' with regex is not as easy as thought.
 String.prototype.replaceAll = function (search, replacement) {
-  var target = this;
-  return target.split(search).join(replacement);
+  return this.replace(new RegExp(`[${search}]`, 'g'),replacement);
 };
 
 
